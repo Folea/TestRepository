@@ -1,0 +1,16 @@
+/* TABLE DDL: */
+CREATE TABLE Codes (
+ cPrdId int NOT NULL );
+/* ALTER COMMANDS: */
+ALTER TABLE Codes ADD cExcId int NULL;
+ALTER TABLE Codes ADD cRic varchar(50) NULL;
+ALTER TABLE Codes ADD cBbgCode varchar(50) NULL;
+ALTER TABLE Codes ADD cToraCode varchar(50) NULL;
+ALTER TABLE Codes ADD cExchangeCode varchar(50) NULL;
+ALTER TABLE Codes ADD cMktId AS  substring(cToraCode ,1 ,len(cToraCode) - patindex('%.[A-Z]%', reverse(cToraCode)))materialized;
+ALTER TABLE Codes ADD cDisplayCode AS  substring(cToraCode , len(cToraCode) + 2 - patindex('%.[A-Z]%', reverse(cToraCode)), 100)materialized;
+ALTER TABLE Codes ADD cIdcCode varchar(50) NULL;
+ALTER TABLE Codes ADD cIsActiveFlag int DEFAULT  1;
+/* TRIGGERS: */
+/* INDEXES: */
+/* FOREIGN KEYS: */
